@@ -44,13 +44,21 @@ def ListarLivros():
   print(valores_lidos)
   
 def ExcluirLivros(livroDel):
-  
-  cursor = conexao.banco.cursor()
-  comando_SQL = "DELETE FROM `cad_livro`.`livros` WHERE (`titulo` = '%s');"
-  cursor.execute(comando_SQL,livroDel)
-  conexao.banco.commit()
-  print(cursor)
-  print(livroDel)
-  print("excluir livros")
 
+  cursor = conexao.banco.cursor()
+  print(livroDel)
+  comando_idLivro = "SELECT idLivro FROM livros WHERE titulo = '{}';".format(livroDel)
+  cursor.execute(comando_idLivro)
+  for (idLivro) in cursor:
+    print(idLivro)
+    comando_SQL = "DELETE FROM `cad_livro`.`livros` WHERE (`idLivro` = '{:d}' );".format(idLivro[0])
+    cursor.execute(comando_SQL)
+    conexao.banco.commit()
+
+def Update(campo, valor, livroUP):
+
+  cursor = conexao.banco.cursor()
+  comando_idLivro = "UPDATE livros SET {} = '{}' WHERE titulo ='{}';".format(campo,valor, livroUP)
+  cursor.execute(comando_idLivro)
+  conexao.banco.commit()
 

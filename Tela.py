@@ -46,27 +46,18 @@ def Cadastrar():
 def Update():
   #string '{}' para passar string
   #Passando o valor top
-  cursor = conexao.banco.cursor()
+ 
   livroUP = input('Qual é o livro que você quer alterar? ')
   campo = input('O que você quer alterar? ')
   valor = input('Digite o novo {} '.format(campo))
   print(livroUP)
+  teste.Update(campo, valor, livroUP)
 
-  comando_idLivro = "UPDATE livros SET {} = '{}' WHERE titulo ='{}';".format(campo,valor, livroUP)
-  cursor.execute(comando_idLivro)
-  conexao.banco.commit()
 
 def Excluir():
-  cursor = conexao.banco.cursor()
+
   livroDel = input('Qual é o livro que você quer excluir? ')
-  print(livroDel)
-  comando_idLivro = "SELECT idLivro FROM livros WHERE titulo = '{}';".format(livroDel)
-  cursor.execute(comando_idLivro)
-  for (idLivro) in cursor:
-    print(idLivro)
-    comando_SQL = "DELETE FROM `cad_livro`.`livros` WHERE (`idLivro` = '{:d}' );".format(idLivro[0])
-    cursor.execute(comando_SQL)
-    conexao.banco.commit()
+  teste.ExcluirLivros(livroDel)
 
 
  
